@@ -28,20 +28,21 @@ if [[ $inst =~ ^[Yy]$ ]]; then
    sudo dnf copr enable che/nerd-fonts -y
    sudo dnf copr enable solopasha/hyprland -y
    sudo dnf copr enable ffreiheit/starship -y
+   sudo dnf copr enable trs-sod/swaylock-effects -y
 
    printf "Installing RPM packages \n"
 
-   apps="flatpak git steam-devices wayland* nerd-fonts btop dolphin lutris zsh"
+   apps="flatpak git steam-devices wayland* nerd-fonts btop dolphin lutris zsh virt-manager fastfetch"
    deps="qt5-qtwayland qt6-qtwayland qt5ct qt6ct qt5-qtsvg qt5-qtquickcontrols2 qt5-qtgraphicaleffects gtk3 polkit-gnome wireplumber jq wl-clipboard"
    dotnet="dotnet-sdk-7.0 aspnetcore-runtime-7.0 dotnet-runtime-7.0"
-   hyprland="hyprland sddm kitty mako waybar-git wofi wlogout xdg-desktop-portal-hyprland swappy grim slurp pamixer pavucontrol brightnessctl bluez blueman network-manager-applet gvfs file-roller starship papirus-icon-theme google-noto-emoji-fonts lxappearance xfce4-settings"
+   hyprland="hyprland sddm swaylock-effects kitty mako waybar-git wofi wlogout xdg-desktop-portal-hyprland swappy grim slurp pamixer pavucontrol brightnessctl bluez blueman network-manager-applet gvfs file-roller starship papirus-icon-theme google-noto-emoji-fonts lxappearance xfce4-settings"
    flatpaks="com.brave.Browser com.discordapp.Discord com.github.tchx84.Flatseal com.gitlab.davem.ClamTk com.mastermindzh.tidal-hifi com.valvesoftware.Steam org.gimp.GIMP org.inkscape.Inkscape org.onlyoffice.desktopeditors org.videolan.VLC tv.plex.PlexDesktop com.obsproject.Studio io.github.achetagames.epic_asset_manager com.mojang.Minecraft com.slack.Slack im.riot.Riot net.davidotek.pupgui2 com.jetbrains.Rider com.jetbrains.WebStorm"
 
     if ! sudo dnf install -y $deps $dotnet $apps $hyprland 2>&1 | tee -a $LOG; then
         printf "${RED} Something went wrong - please check the install.log \n"
         exit 1
     fi
-    printf "${GREEN} All necessary packages installed successfully."
+    printf "${GREEN} All necessary packages installed successfully. \n"
 
     printf " ------------- FLATPAK -------------\n"
 
@@ -61,9 +62,6 @@ if [[ $inst =~ ^[Yy]$ ]]; then
 
     (echo; echo 'eval "$(homebrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-else
-    printf "${RED} Packages not installed - please check the install.log"
-    sleep 1
 fi
 
 printf " ${YELLOW} Creating default dirs \n"
@@ -79,8 +77,7 @@ printf " ${YELLOW} Enabling SDDM \n"
 systemctl set-default graphical.target
 
 printf " ${YELLOW} Copying Hyprland Configuration \n"
-mkdir -p ~/.config/hypr
-cp $scriptDir/hyprland.conf ~/.config/hypr/
+cp -r $scriptDir/Configs/* ~/.config
 
 read -n1 -rep "${CAT} Reboot now ? (y/n)" inst
 
