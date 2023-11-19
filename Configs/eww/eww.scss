@@ -13,7 +13,7 @@ $sky: #91d7e3;
 $sapphire: #7dc4e4;
 $blue: #8aadf4;
 $lavender: #b7bdf8;
-$text: #cad3f5;
+$text: #f5f5f5;
 $subtext1: #b8c0e0;
 $subtext0: #a5adcb;
 $overlay2: #939ab7;
@@ -35,7 +35,7 @@ $crust: #181926;
 .bar {
   // border-radius: 30px;
   // background-color: $crust;
-  color: $subtext1;
+  color: $text;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -127,7 +127,7 @@ scale > contents > trough > slider {
   padding-left: 15px;
   padding-right: 15px;
   background-color: $lavender;
-  color: $mantle;
+  color: $teal;
   // color: $crust;
   // font-weight: bold;
   border-top-left-radius: 30px;
@@ -145,32 +145,11 @@ scale > contents > trough > slider {
 //
 .workspaces {
 
-  background-color: $crust;
   color: $text;
   min-height: 30px;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  min-width: 30px;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.workspace-DP-2 {
-  padding-left: 15px;
-  // padding-right: 5px;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-}
-.workspace-DP-4 {
-  padding-left: 10px;
-  padding-right: 15px;
-  // background-color: $lavender;
-  // color: $base;
-  background-color: $base;
-  // color: $base;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
 }
 
 // .workspace-DP-4 .selected {
@@ -186,15 +165,12 @@ scale > contents > trough > slider {
 }
 
 .selected {
-  color: $lavender;
+  color: $text;
+  font-weight: bold;
 }
 
 .urgent {
   color: $red;
-}
-
-.selected .number {
-    font-weight: bold;
 }
 
 .process {
